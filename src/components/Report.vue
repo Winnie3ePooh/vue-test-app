@@ -1,18 +1,27 @@
 <template  lang="pug">
   div
-    table.table-fill
-      thead
-        tr
-          th.text-left Дата
-          th.text-left Переходы
-          th.text-left Регистрации
-          th.text-left Доходы
+    table.table-fill(v-for="i in Array.from(Array(date.length).keys())")
       tbody.table-hover
-        tr(v-for="i in Array.from(Array(date.length).keys())")
-          td.text-center {{date[i]}}
-          td.text-center {{visits[i].event_count}}
-          td.text-center {{regs[i].event_count}}
-          td.text-center {{pays[i].event_val}}
+        tr
+          td
+            .report
+              span.left Дата
+              span.right {{date[i]}}
+        tr
+          td
+            .report
+              span.left Переходы
+              span.right {{visits[i].event_count}}
+        tr
+          td
+            .report
+              span.left Регистрации
+              span.right {{regs[i].event_count}}
+        tr
+          td
+            .report
+              span.left Доходы
+              span.right {{pays[i].event_val}}
 </template>
 
 <script>
@@ -35,8 +44,8 @@
     background: white;
     border-radius:3px;
     border-collapse: collapse;
+    margin-bottom: 10px;
     height: 320px;
-    margin: auto;
     max-width: 100%;
     padding:5px;
     width: 100%;
@@ -45,6 +54,7 @@
   }
 
   tbody {
+    border-top:1px solid #9ea7af;
     max-height: 320px;
   }
 
@@ -112,7 +122,6 @@
   td {
     background:#FFFFFF;
     padding:20px;
-    text-align:left;
     vertical-align:middle;
     font-weight:300;
     font-size:18px;
@@ -120,9 +129,6 @@
     border-right: 1px solid #C1C3D1;
   }
 
-  td:last-child {
-    border-right: 0px;
-  }
 
   th.text-left {
     text-align: left;
@@ -146,6 +152,10 @@
 
   td.text-right {
     text-align: right;
+  }
+  .report {
+    display: flex;
+    justify-content: space-between;
   }
 
 </style>
