@@ -27,11 +27,11 @@
 <script>
   export default {
     name: "report",
-    props: ['date','visits','regs','pays'],
+    props: ['date','visits','regs','pays',],
     watch: {
-      pays: function(arr){
+      pays(arr) {
         this.pays.forEach(el =>{
-          el.event_val = new Intl.NumberFormat('ru-ru').format(el.event_val) + ' ₽';
+          el.event_val = new Intl.NumberFormat('ru-ru').format(el.event_val) + ' ₽'
         })
       }
     }

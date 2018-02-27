@@ -18,12 +18,18 @@ module.exports = {
   resolve: {
     alias: {
       'public': path.resolve(__dirname, '../public'),
-      'chart': require.resolve('chart.js'),
-    },
+      'chart': require.resolve('chart.js')
+    }
   },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
+	  {
+		enforce: 'pre',
+		test: /\.vue$/,
+		loader: 'eslint-loader',
+		exclude: /node_modules/
+	  },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -46,9 +52,9 @@ module.exports = {
         test: /\.css$/,
         use: isProd
           ? ExtractTextPlugin.extract({
-              use: 'css-loader?minimize',
-              fallback: 'vue-style-loader'
-            })
+            use: 'css-loader?minimize',
+            fallback: 'vue-style-loader'
+          })
           : ['vue-style-loader', 'css-loader']
       },
       {
@@ -63,15 +69,15 @@ module.exports = {
   },
   plugins: isProd
     ? [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new ExtractTextPlugin({
-          filename: 'common.[chunkhash].css'
-        })
-      ]
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false }
+      }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new ExtractTextPlugin({
+        filename: 'common.[chunkhash].css'
+      })
+    ]
     : [
-        new FriendlyErrorsPlugin()
-      ]
+      new FriendlyErrorsPlugin()
+    ]
 }

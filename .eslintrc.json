@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "standard",
+    "plugin:vue/essential"
+  ],
+  "plugins": [
+    "html"
+  ],
+  "rules": {
+    "semi": 0
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
